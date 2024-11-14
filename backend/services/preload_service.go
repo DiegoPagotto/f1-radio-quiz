@@ -33,16 +33,51 @@ func LoadSessions() error {
         var existingSession models.Session
         result := db.DB.First(&existingSession, "session_key = ?", apiSession.SessionKey)
         if result.RowsAffected == 0 {
+            driverNumbers, err := LoadDriversBySessionKey(apiSession.SessionKey)
+            if err != nil {
+                return err
+            }
+
+            var drivers []models.Driver
+            for _, driverNumber := range driverNumbers {
+                var driver models.Driver
+                db.DB.First(&driver, "driver_number = ?", driverNumber)
+                drivers = append(drivers, driver)
+            }
+
             session := models.Session{
                 SessionKey:   apiSession.SessionKey,
                 Year:         apiSession.Year,
                 Location:     apiSession.Location,
                 SessionTitle: apiSession.SessionTitle,
+                Drivers:      drivers,
             }
             db.DB.Create(&session)
         }
     }
     return nil
+}
+
+func LoadDriversBySessionKey(sessionKey int) ([]int, error) {
+    url := fmt.Sprintf("%s/drivers?session_key=%d", apiURL, sessionKey)
+    resp, err := http.Get(url)
+    if err != nil {
+        return nil, fmt.Errorf("failed to fetch drivers for session %d: %w", sessionKey, err)
+    }
+    defer resp.Body.Close()
+
+    var apiDrivers []struct {
+        DriverNumber int `json:"driver_number"`
+    }
+    if err := json.NewDecoder(resp.Body).Decode(&apiDrivers); err != nil {
+        return nil, fmt.Errorf("failed to decode drivers response on session (%d): %w", sessionKey, err)
+    }
+
+    var driverNumbers []int
+    for _, apiDriver := range apiDrivers {
+        driverNumbers = append(driverNumbers, apiDriver.DriverNumber)
+    }
+    return driverNumbers, nil
 }
 
 func LoadDrivers() error {
