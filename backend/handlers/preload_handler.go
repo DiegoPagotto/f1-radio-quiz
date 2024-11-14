@@ -6,15 +6,15 @@ import (
 )
 
 func PreloadF1DataHandler(w http.ResponseWriter, r *http.Request) {
-    err := services.LoadSessions()
+    err := services.LoadDrivers()
     if err != nil {
-        http.Error(w, "Failed to load sessions: "+err.Error(), http.StatusInternalServerError)
+        http.Error(w, "Failed to load drivers: "+err.Error(), http.StatusInternalServerError)
         return
     }
 
-    err = services.LoadDrivers()
+    err = services.LoadSessions()
     if err != nil {
-        http.Error(w, "Failed to load drivers: "+err.Error(), http.StatusInternalServerError)
+        http.Error(w, "Failed to load sessions: "+err.Error(), http.StatusInternalServerError)
         return
     }
 
