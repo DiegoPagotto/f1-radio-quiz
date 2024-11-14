@@ -7,4 +7,5 @@ type Driver struct {
 	TeamName     string
 	TeamColour   string
 	PictureURL   string
+	Sessions  []Session `gorm:"many2many:driver_sessions;"`
 }
