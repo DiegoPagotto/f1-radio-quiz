@@ -59,3 +59,18 @@ func LoadSessions() error {
     }
     return nil
 }
+
+func GetRandomSessionWithDrivers() (models.Session, error) {
+    session, err := repositories.GetRandomSession()
+    if err != nil {
+        return models.Session{}, err
+    }
+
+    drivers, err := repositories.GetDriversBySession(session.SessionKey)
+    if err != nil {
+        return models.Session{}, err
+    }
+
+    session.Drivers = drivers
+    return session, nil
+}
