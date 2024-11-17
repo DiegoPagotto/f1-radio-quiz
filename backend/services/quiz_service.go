@@ -1,24 +1,27 @@
 package services
 
 import (
-	"f1-radio-quiz/data"
+	"f1-radio-quiz/config"
 	"f1-radio-quiz/models"
 	"math/rand"
+	"time"
 )
 
 func GetRandomQuestion() models.QuizQuestion {
-    question := data.Questions[rand.Intn(len(data.Questions))]
-    return models.QuizQuestion{
-        Question: question.Question,
-        Options:  question.Options,
-    }
-}
+    question := models.QuizQuestion{}
+    session, _ := GetRandomSessionWithDrivers()
 
-func CheckAnswer(answer models.AnswerRequest) bool {
-    for _, question := range data.Questions {
-        if question.Question == answer.Question {
-            return answer.Option == question.Answer
-        }
-    }
-    return false
+    drivers := session.Drivers
+
+    rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
+
+    randomDriverIndex := rnd.Intn(len(drivers))
+    randomDriver := drivers[randomDriverIndex]
+
+    question.Session = session
+    question.Options = GetRandomDriversOfSession(config.NUMBER_OF_OPTIONS, session)
+    question.AnswerDriverNumber = randomDriver.DriverNumber
+    question.RadioURL = GetRadioURL()
+
+    return question
 }
