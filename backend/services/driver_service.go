@@ -6,7 +6,9 @@ import (
 	"f1-radio-quiz/db"
 	"f1-radio-quiz/models"
 	"fmt"
+	"math/rand"
 	"net/http"
+	"time"
 )
 
 func LoadDrivers() error {
@@ -68,4 +70,20 @@ func LoadDriversBySessionKey(sessionKey int) ([]int, error) {
         driverNumbers = append(driverNumbers, apiDriver.DriverNumber)
     }
     return driverNumbers, nil
+}
+
+func GetRandomDriversOfSession(optionsCount int, session models.Session) []models.Driver {
+    drivers := session.Drivers
+    rnd := rand.New(rand.NewSource(time.Now().UnixNano()))
+    rnd.Shuffle(len(drivers), func(i, j int) { drivers[i], drivers[j] = drivers[j], drivers[i] })
+
+    if optionsCount > len(drivers) {
+        optionsCount = len(drivers)
+    }
+
+    return drivers[:optionsCount]
+}
+
+func GetRadioURL() string {
+    return "https://www.formula1.com/en/live.html"
 }
