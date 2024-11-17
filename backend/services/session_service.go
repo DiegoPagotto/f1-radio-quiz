@@ -10,6 +10,7 @@ import (
 	"net/http"
 )
 
+
 func LoadSessions() error {
     url := config.API_URL + "/sessions"
     resp, err := http.Get(url)
@@ -52,9 +53,12 @@ func LoadSessions() error {
                 Year:         apiSession.Year,
                 Location:     apiSession.Location,
                 SessionTitle: apiSession.SessionTitle,
-                Drivers:      drivers,
+                Drivers:     drivers,
             }
-            db.DB.Create(&session)
+
+            if err := db.DB.Create(&session).Error; err != nil {
+                return fmt.Errorf("failed to create session: %w", err)
+            }
         }
     }
     return nil
@@ -72,5 +76,6 @@ func GetRandomSessionWithDrivers() (models.Session, error) {
     }
 
     session.Drivers = drivers
+
     return session, nil
 }
