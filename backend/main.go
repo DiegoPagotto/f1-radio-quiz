@@ -12,7 +12,6 @@ func main() {
     db.SetupDatabase()
 
     http.HandleFunc("/api/quiz", handlers.GetQuiz)
-    http.HandleFunc("/api/check-answer", handlers.CheckAnswer)
     http.HandleFunc("/api/preload-f1-data", handlers.PreloadF1DataHandler)
 
     fmt.Println("Server is running on http://localhost:8080")
