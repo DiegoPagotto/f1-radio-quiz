@@ -23,7 +23,7 @@ func GetRandomSession() (models.Session, error) {
 
 func GetDriversBySession(sessionKey int) ([]models.Driver, error) {
     var drivers []models.Driver
-    err := db.DB.Joins("JOIN driver_sessions ON driver_sessions.driver_driver_number = drivers.driver_number").
+    err := db.DB.Joins("JOIN driver_sessions ON driver_sessions.driver_id = drivers.id").
         Where("driver_sessions.session_session_key = ?", sessionKey).
         Find(&drivers).Error
     return drivers, err
