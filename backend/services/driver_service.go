@@ -83,7 +83,3 @@ func GetRandomDriversOfSession(optionsCount int, session models.Session) []model
 
     return drivers[:optionsCount]
 }
-
-func GetRadioURL() string {
-    return "https://www.formula1.com/en/live.html"
-}
