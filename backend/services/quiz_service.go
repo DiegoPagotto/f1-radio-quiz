@@ -20,7 +20,7 @@ func GetRandomQuestion() models.QuizQuestion {
     randomDriver := question.Options[randomDriverIndex]
 
     question.AnswerDriverNumber = randomDriver.DriverNumber
-    question.RadioURL = GetRadioURL()
+    question.RadioURL, _ = GetRandomRadioBySessionAndDriver(question.Session.SessionKey, randomDriver.DriverNumber)
 
     return question
 }
