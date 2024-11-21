@@ -3,6 +3,7 @@ import { ConfigProvider } from 'antd';
 import enUS from 'antd/es/locale/en_US';
 import 'antd/dist/reset.css';
 import './index.css';
+import Quiz from './views/quiz/Quiz';
 
 const App: React.FC = () => {
     const getCSSVariable = (variable: string) =>
@@ -21,7 +22,9 @@ const App: React.FC = () => {
                 },
             }}
         >
-            <div></div>
+            <div>
+                <Quiz />
+            </div>
         </ConfigProvider>
     );
 };
