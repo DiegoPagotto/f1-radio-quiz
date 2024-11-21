@@ -3,10 +3,10 @@
     line-height: 1.5;
     font-weight: 400;
 
-    --color-primary: #ef3e36; /* Vermilion */
-    --color-secondary: #948080; /* Cinereous */
-    --color-background: #fadfdd; /* Misty Rose */
-    --color-text: #2e282a; /* Raisin Black */
+    --color-primary: #ef3e36;
+    --color-secondary: #ff7070;
+    --color-background: #fff5f4;
+    --color-text: #2e282a;
 
     background-color: var(--color-background);
 
