@@ -2,12 +2,19 @@ package handlers
 
 import (
 	"encoding/json"
+	"f1-radio-quiz/models"
 	"f1-radio-quiz/services"
 	"net/http"
 )
 
 func GetQuiz(w http.ResponseWriter, r *http.Request) {
-    question := services.GetRandomQuestion()
+    var question models.QuizQuestion
+    for {
+        question = services.GetRandomQuestion()
+        if question.RadioURL != "" {
+            break
+        }
+    }
     json.NewEncoder(w).Encode(question)
 }
 
