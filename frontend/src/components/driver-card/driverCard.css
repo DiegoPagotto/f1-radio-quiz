@@ -1,0 +1,37 @@
+.driver-card {
+    transition: transform 0.3s ease;
+    width: 16vw;
+    border-radius: 30px;
+}
+
+.driver-card:hover {
+    transform: scale(1.05);
+}
+
+.driver-avatar {
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 1));
+}
+
+.driver-card-content {
+    padding: 16px;
+    text-align: center;
+}
+
+.driver-card-content h3 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.driver-card-content p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.driver-flag {
+    scale: 2;
+}
+
+.team-name {
+    font-style: italic;
+}
