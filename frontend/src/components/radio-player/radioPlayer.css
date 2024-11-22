@@ -1,0 +1,8 @@
+.radio-player__button {
+    width: 10vw !important;
+    height: 10vw !important;
+}
+
+.radio-player__button__icon {
+    font-size: 8vh !important;
+}
