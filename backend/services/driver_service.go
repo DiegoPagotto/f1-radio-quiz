@@ -5,6 +5,7 @@ import (
 	"f1-radio-quiz/config"
 	"f1-radio-quiz/db"
 	"f1-radio-quiz/models"
+	"f1-radio-quiz/utils"
 	"fmt"
 	"math/rand"
 	"net/http"
@@ -39,7 +40,7 @@ func LoadDrivers() error {
             driver := models.Driver{
                 DriverNumber: apiDriver.DriverNumber,
                 FullName:     apiDriver.FullName,
-                CountryCode:  apiDriver.CountryCode,
+                CountryCode:  utils.SanitizeCountryCode(apiDriver.CountryCode),
                 TeamName:     apiDriver.TeamName,
                 TeamColour:   apiDriver.TeamColour,
                 PictureURL:   apiDriver.PictureURL,
