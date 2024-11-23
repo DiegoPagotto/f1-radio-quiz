@@ -17,10 +17,24 @@
     background-color: var(--color-secondary);
     padding: 24px;
     border-radius: 50px;
-    width: 60vw;
+    width: 80vw;
     height: fit-content;
     display: flex;
+    flex-direction: column;
+    gap: 4rem;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.quiz-options {
+    display: flex;
+    gap: 1rem;
 }
