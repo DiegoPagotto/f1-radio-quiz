@@ -3,7 +3,11 @@ import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import './radioPlayer.css';
 
-const RadioPlayer: React.FC = () => {
+interface RadioPlayerProps {
+    radioURL: string;
+}
+
+const RadioPlayer: React.FC<RadioPlayerProps> = ({ radioURL }) => {
     const audioRef = useRef<HTMLAudioElement>(null);
     const [isPlaying, setPlaying] = useState(false);
 
@@ -28,10 +32,7 @@ const RadioPlayer: React.FC = () => {
     return (
         <>
             <audio ref={audioRef} onEnded={handleEnded}>
-                <source
-                    src="https://livetiming.formula1.com/static/2024/2024-05-05_Miami_Grand_Prix/2024-05-03_Sprint_Qualifying/TeamRadio/MAXVER01_1_20240503_221605.mp3"
-                    type="audio/mpeg"
-                />
+                <source src={radioURL} type="audio/mpeg" />
             </audio>
             <div className="radio-player">
                 <Button
