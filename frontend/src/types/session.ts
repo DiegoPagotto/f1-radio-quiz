@@ -4,3 +4,10 @@ export interface Session {
     location: string;
     sessionTitle: string;
 }
+
+export interface SessionResponse {
+    session_key: string;
+    year: number;
+    location: string;
+    session_title: string;
+}
