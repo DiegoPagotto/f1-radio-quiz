@@ -3,6 +3,8 @@ import countries from 'i18n-iso-countries';
 import enLocale from 'i18n-iso-countries/langs/en.json';
 import emojiFlags, { CountryData } from 'emoji-flags';
 import './DriverCard.css';
+import { Driver } from '../../types/driver';
+import fallbackDriver from '../../assets/fallback_driver.png';
 
 countries.registerLocale(enLocale);
 
@@ -16,29 +18,35 @@ const getFlagByCountryCode = (alpha3: string) => {
     return countryData.emoji || '🏳️';
 };
 
-const DriverCard = () => {
-    const country = 'NLD';
-    const flagEmoji = getFlagByCountryCode(country);
+interface DriverCardProps {
+    driver: Driver;
+}
+
+const DriverCard = ({ driver }: DriverCardProps) => {
+    const flagEmoji = getFlagByCountryCode(driver.countryCode);
 
     return (
         <Card
             bordered={false}
             hoverable
-            style={{ backgroundColor: '#3671C6' }}
+            style={{ backgroundColor: `#${driver.teamColour}` }}
             cover={
                 <img
                     className="driver-avatar"
-                    alt="Max Verstappen"
-                    src="https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/5col/image.png"
+                    alt={driver.fullName}
+                    src={
+                        driver.pictureURL.replace('1col', '5col') ||
+                        fallbackDriver
+                    }
                 />
             }
             className="driver-card"
         >
             <div className="driver-card-content">
-                <h3>Max Verstappen</h3>
+                <h3>{driver.fullName}</h3>
                 <div>
                     <p className="driver-flag">{flagEmoji}</p>
-                    <p className="team-name">Red Bull Racing</p>
+                    <p className="team-name">{driver.teamName}</p>
                 </div>
             </div>
         </Card>
