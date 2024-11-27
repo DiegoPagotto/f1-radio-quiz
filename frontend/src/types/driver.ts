@@ -5,6 +5,7 @@ export interface Driver {
     teamName: string;
     teamColour: string;
     pictureURL: string;
+    flagEmoji: string;
 }
 
 export interface DriverResponse {

@@ -26,6 +26,7 @@ export const getQuizQuestion = async (): Promise<Quiz> => {
             teamName: option.team_name,
             teamColour: option.team_colour,
             pictureURL: option.picture_url,
+            flagEmoji: '',
         })),
         answerDriverNumber: rawQuiz.answer_driver_number,
     };
