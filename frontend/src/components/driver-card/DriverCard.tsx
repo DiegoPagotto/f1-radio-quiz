@@ -7,9 +7,23 @@ import React from 'react';
 interface DriverCardProps {
     driver: Driver;
     onClick: (event: React.MouseEvent<HTMLDivElement>, driver: Driver) => void;
+    isEnabled: boolean;
 }
 
-const DriverCard: React.FC<DriverCardProps> = ({ driver, onClick }) => {
+const DriverCard: React.FC<DriverCardProps> = ({
+    driver,
+    onClick,
+    isEnabled,
+}) => {
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (!isEnabled) {
+            event.stopPropagation();
+            event.preventDefault();
+            return;
+        }
+        onClick(event, driver);
+    };
+
     return (
         <Card
             bordered={false}
@@ -25,7 +39,7 @@ const DriverCard: React.FC<DriverCardProps> = ({ driver, onClick }) => {
                     }
                 />
             }
-            onClick={(event) => onClick(event, driver)}
+            onClick={handleClick}
             className="driver-card"
         >
             <div className="driver-card-content">
