@@ -28,7 +28,10 @@ const DriverCard: React.FC<DriverCardProps> = ({
         <Card
             bordered={false}
             hoverable
-            style={{ backgroundColor: `#${driver.teamColour}` }}
+            style={{
+                backgroundColor: `#${driver.teamColour}`,
+                filter: isEnabled ? 'none' : 'grayscale(100%)',
+            }}
             cover={
                 <img
                     className="driver-avatar"
