@@ -16,9 +16,11 @@ const { Content } = Layout;
 
 const Quiz: React.FC = () => {
     const [currentQuiz, setCurrentQuiz] = useState<Quiz>();
+    const [driversToDisable, setDriversToDisable] = useState<number[]>([]);
 
     const updateCurrentQuiz = async () => {
         getQuizQuestion().then((quiz) => {
+            setDriversToDisable([]);
             const optionsWithFlags = quiz.options.map((driver) => ({
                 ...driver,
                 flagEmoji: getFlagByCountryCode(driver.countryCode),
@@ -31,11 +33,25 @@ const Quiz: React.FC = () => {
         updateCurrentQuiz();
     }, []);
 
+    const disableIncorrectOptions = () => {
+        if (currentQuiz) {
+            const driversToDisable = currentQuiz.options
+                .filter(
+                    (driver) =>
+                        driver.driverNumber !== currentQuiz.answerDriverNumber
+                )
+                .map((driver) => driver.driverNumber);
+            setDriversToDisable(driversToDisable);
+        }
+    };
+
     const checkAnswer = (
         event: React.MouseEvent<HTMLDivElement>,
         driver: Driver
     ) => {
-        if (currentQuiz) {
+        if (currentQuiz && driversToDisable.length === 0) {
+            disableIncorrectOptions();
+
             const correct =
                 currentQuiz.answerDriverNumber === driver.driverNumber;
             const x = event.clientX / window.innerWidth;
@@ -64,6 +80,11 @@ const Quiz: React.FC = () => {
                                 key={driver.driverNumber}
                                 driver={driver}
                                 onClick={checkAnswer}
+                                isEnabled={
+                                    !driversToDisable.includes(
+                                        driver.driverNumber
+                                    )
+                                }
                             />
                         ))}
                     </div>
