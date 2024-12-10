@@ -92,7 +92,9 @@ const Quiz: React.FC = () => {
             </Content>
         </Layout>
     ) : (
-        <Spin />
+        <div className="spin-container">
+            <Spin size="large" />
+        </div>
     );
 };
 

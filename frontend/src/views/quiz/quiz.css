@@ -38,3 +38,10 @@
     display: flex;
     gap: 1rem;
 }
+
+.spin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
