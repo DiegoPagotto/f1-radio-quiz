@@ -1,7 +1,7 @@
 import { Card } from 'antd';
 import './DriverCard.css';
 import { Driver } from '../../types/driver';
-import fallbackDriver from '../../assets/fallback_driver.png';
+import fallbackDriver from '../../assets/images/fallback_driver.png';
 import React from 'react';
 
 interface DriverCardProps {
