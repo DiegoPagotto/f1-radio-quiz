@@ -19,6 +19,7 @@ const App: React.FC = () => {
                     colorPrimary: getCSSVariable('--color-primary'),
                     colorBgBase: getCSSVariable('--color-background'),
                     colorPrimaryText: getCSSVariable('--color-text'),
+                    fontFamily: getCSSVariable('--font-primary'),
                 },
             }}
         >
