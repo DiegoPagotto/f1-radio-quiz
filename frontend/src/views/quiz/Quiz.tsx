@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, Spin } from 'antd';
+import { Layout } from 'antd';
 import './quiz.css';
 import RadioPlayer from '../../components/radio-player/RadioPlayer';
 import CircuitInfo from '../../components/circuit-info/CircuitInfo';
@@ -11,6 +11,7 @@ import { AlertType } from '../../types/alert';
 import { throwErrorConfetti, throwSuccessConfetti } from '../../utils/confetti';
 import { getFlagByCountryCode } from '../../utils/flags';
 import { Driver } from '../../types/driver';
+import Loading from '../../components/loading/Loading';
 
 const { Content } = Layout;
 
@@ -92,9 +93,7 @@ const Quiz: React.FC = () => {
             </Content>
         </Layout>
     ) : (
-        <div className="spin-container">
-            <Spin size="large" />
-        </div>
+        <Loading />
     );
 };
 
