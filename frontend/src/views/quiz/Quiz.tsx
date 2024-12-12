@@ -20,6 +20,7 @@ const Quiz: React.FC = () => {
     const [driversToDisable, setDriversToDisable] = useState<number[]>([]);
 
     const updateCurrentQuiz = async () => {
+        setCurrentQuiz(undefined);
         getQuizQuestion().then((quiz) => {
             setDriversToDisable([]);
             const optionsWithFlags = quiz.options.map((driver) => ({
