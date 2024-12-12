@@ -4,8 +4,13 @@
     border-radius: 30px;
 }
 
+.driver-card-scaled,
 .driver-card:hover {
     transform: scale(1.05);
+}
+
+.driver-card-disabled {
+    filter: grayscale(100%);
 }
 
 .driver-avatar {

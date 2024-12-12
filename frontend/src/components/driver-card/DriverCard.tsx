@@ -8,12 +8,14 @@ interface DriverCardProps {
     driver: Driver;
     onClick: (event: React.MouseEvent<HTMLDivElement>, driver: Driver) => void;
     isEnabled: boolean;
+    isScaled: boolean;
 }
 
 const DriverCard: React.FC<DriverCardProps> = ({
     driver,
     onClick,
     isEnabled,
+    isScaled,
 }) => {
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (!isEnabled) {
@@ -30,7 +32,6 @@ const DriverCard: React.FC<DriverCardProps> = ({
             hoverable
             style={{
                 backgroundColor: `#${driver.teamColour}`,
-                filter: isEnabled ? 'none' : 'grayscale(100%)',
             }}
             cover={
                 <img
@@ -43,7 +44,9 @@ const DriverCard: React.FC<DriverCardProps> = ({
                 />
             }
             onClick={handleClick}
-            className="driver-card"
+            className={`driver-card ${isScaled ? 'driver-card-scaled' : ''} ${
+                isEnabled ? '' : 'driver-card-disabled'
+            }`}
         >
             <div className="driver-card-content">
                 <h3>{driver.fullName}</h3>
