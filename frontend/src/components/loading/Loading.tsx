@@ -4,8 +4,19 @@ import './loading.css';
 import { loadingPhrases } from '../../assets/text/loadingPhrases';
 
 const Loading = () => {
+    const getRandomPhrase = (exclude: string) => {
+        let newPhrase;
+        do {
+            newPhrase =
+                loadingPhrases[
+                    Math.floor(Math.random() * loadingPhrases.length)
+                ];
+        } while (newPhrase === exclude);
+        return newPhrase;
+    };
+
     const [currentPhrase, setCurrentPhrase] = useState<string>(
-        loadingPhrases[0]
+        getRandomPhrase('')
     );
     const [isFading, setIsFading] = useState<boolean>(false);
 
@@ -13,10 +24,7 @@ const Loading = () => {
         const interval = setInterval(() => {
             setIsFading(true);
             setTimeout(() => {
-                const randomIndex = Math.floor(
-                    Math.random() * loadingPhrases.length
-                );
-                setCurrentPhrase(loadingPhrases[randomIndex]);
+                setCurrentPhrase((prevPhrase) => getRandomPhrase(prevPhrase));
                 setIsFading(false);
             }, 500);
         }, 2000);
