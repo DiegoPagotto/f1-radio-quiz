@@ -18,6 +18,10 @@ const { Content } = Layout;
 const Quiz: React.FC = () => {
     const [currentQuiz, setCurrentQuiz] = useState<Quiz>();
     const [driversToDisable, setDriversToDisable] = useState<number[]>([]);
+    const [correctDriverNumber, setCorrectDriverNumber] = useState<
+        number | null
+    >(null);
+    const [isAnswerChecked, setIsAnswerChecked] = useState<boolean>(false);
 
     const updateCurrentQuiz = async () => {
         setCurrentQuiz(undefined);
@@ -28,6 +32,8 @@ const Quiz: React.FC = () => {
                 flagEmoji: getFlagByCountryCode(driver.countryCode),
             }));
             setCurrentQuiz({ ...quiz, options: optionsWithFlags });
+            setCorrectDriverNumber(quiz.answerDriverNumber);
+            setIsAnswerChecked(false);
         });
     };
 
@@ -35,7 +41,7 @@ const Quiz: React.FC = () => {
         updateCurrentQuiz();
     }, []);
 
-    const disableIncorrectOptions = () => {
+    const highlightCorrectDriver = () => {
         if (currentQuiz) {
             const driversToDisable = currentQuiz.options
                 .filter(
@@ -52,15 +58,20 @@ const Quiz: React.FC = () => {
         driver: Driver
     ) => {
         if (currentQuiz && driversToDisable.length === 0) {
-            disableIncorrectOptions();
+            highlightCorrectDriver();
 
             const correct =
                 currentQuiz.answerDriverNumber === driver.driverNumber;
             const x = event.clientX / window.innerWidth;
             const y = event.clientY / window.innerHeight;
 
-            if (correct) throwSuccessConfetti(driver.flagEmoji, x, y);
-            else throwErrorConfetti(x, y);
+            setIsAnswerChecked(true);
+
+            if (correct) {
+                throwSuccessConfetti(driver.flagEmoji, x, y);
+            } else {
+                throwErrorConfetti(x, y);
+            }
 
             showAlertWithTimer(
                 correct ? AlertType.Success : AlertType.Error
@@ -86,6 +97,10 @@ const Quiz: React.FC = () => {
                                     !driversToDisable.includes(
                                         driver.driverNumber
                                     )
+                                }
+                                isScaled={
+                                    isAnswerChecked &&
+                                    correctDriverNumber === driver.driverNumber
                                 }
                             />
                         ))}
