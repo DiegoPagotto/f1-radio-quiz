@@ -11,6 +11,7 @@
 
 .driver-card-disabled {
     filter: grayscale(100%);
+    pointer-events: none;
 }
 
 .driver-avatar {
