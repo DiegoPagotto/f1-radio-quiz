@@ -1,16 +1,17 @@
 import { Session } from '../../types/session';
+import './circuitInfo.css';
 
 interface CircuitInfoProps {
     session: Session;
 }
 
 const CircuitInfo = ({ session }: CircuitInfoProps) => {
-    console.log(session);
     return (
-        <div>
+        <div className="circuit-info">
             <h1>{session.location}</h1>
-            <h3>{session.sessionTitle}</h3>
-            <h3>{session.year}</h3>
+            <h3>
+                {session.sessionTitle} - {session.year}
+            </h3>
         </div>
     );
 };
