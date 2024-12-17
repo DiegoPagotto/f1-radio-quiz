@@ -38,3 +38,24 @@
     display: flex;
     gap: 1rem;
 }
+
+@media (max-width: 600px) {
+    .quiz-container {
+        width: 90vw;
+        gap: 2rem;
+    }
+
+    .quiz-options {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .driver-card {
+        flex: 1 1 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+
+    .driver-avatar {
+        scale: 0.8;
+    }
+}
