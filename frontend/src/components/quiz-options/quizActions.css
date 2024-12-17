@@ -1,0 +1,18 @@
+.quiz-actions {
+    align-self: start;
+    margin-top: 1rem;
+}
+
+.quiz-actions button {
+    font-size: 1.2em;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+}
+
+.quiz-actions button:hover {
+    background-color: var(--color-primary-darker);
+}
