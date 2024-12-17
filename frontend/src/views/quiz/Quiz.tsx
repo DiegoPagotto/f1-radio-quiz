@@ -12,6 +12,7 @@ import { throwErrorConfetti, throwSuccessConfetti } from '../../utils/confetti';
 import { getFlagByCountryCode } from '../../utils/flags';
 import { Driver } from '../../types/driver';
 import Loading from '../../components/loading/Loading';
+import QuizActions from '../../components/quiz-options/QuizActions';
 
 const { Content } = Layout;
 
@@ -86,6 +87,7 @@ const Quiz: React.FC = () => {
                     <div className="quiz-header">
                         <RadioPlayer radioURL={currentQuiz.radioURL} />
                         <CircuitInfo session={currentQuiz.session} />
+                        <QuizActions handleSkip={updateCurrentQuiz} />
                     </div>
                     <div className="quiz-options">
                         {currentQuiz.options.map((driver) => (
